@@ -37,9 +37,15 @@ class AndroidControlsSubState extends FlxSubState
 	{
 		curSelected = AndroidControls.getMode();
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0.6;
-		bg.scrollFactor.set();
+		var bg = new FlxSprite(-85);
+		bg.loadGraphic(Paths.image('menus/base/menuDesat'));
+		bg.scrollFactor.x = 0;
+		bg.scrollFactor.y = 0.18;
+		bg.setGraphicSize(Std.int(bg.width * 1.1));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.color = 0xCE64DF;
+		bg.antialiasing = true;
 		add(bg);
 
 		resetButton = new FlxButton(FlxG.width - 200, 50, "Reset", function()
