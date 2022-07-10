@@ -184,7 +184,6 @@ class FlxVirtualPad extends FlxSpriteGroup
 	 * @param   Height     The height of the button.
 	 * @param   Graphic    The image of the button. It must contains 3 frames (`NORMAL`, `HIGHLIGHT`, `PRESSED`).
 	 * @param   Color      The color of the button.
-	 * @param   Callback   The callback for the button.
 	 * @return  The button
 	 */
 	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
