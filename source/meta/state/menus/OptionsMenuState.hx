@@ -135,6 +135,10 @@ class OptionsMenuState extends MusicBeatState
 		add(infoText);
 
 		loadSubgroup('main');
+
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	private var currentAttachmentMap:Map<Alphabet, Dynamic>;
@@ -569,6 +573,9 @@ class OptionsMenuState extends MusicBeatState
 			lockedMovement = true;
 			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
 			{
+				#if android
+				removeVirtualPad();
+				#end
 				openSubState(new OptionsSubstate());
 				lockedMovement = false;
 			});

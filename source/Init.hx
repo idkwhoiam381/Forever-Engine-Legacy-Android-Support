@@ -51,7 +51,7 @@ class Init extends FlxState
 			NOT_FORCED
 		],
 		'Controller Mode' => [
-			false,
+			#if android true #else false #end,
 			Checkmark,
 			'Whether to use a controller instead of the keyboard to play.',
 			NOT_FORCED
@@ -238,6 +238,10 @@ class Init extends FlxState
 
 	override public function create():Void
 	{
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+
 		FlxG.save.bind('foreverengine-options');
 		Highscore.load();
 
@@ -310,8 +314,10 @@ class Init extends FlxState
 
 		updateAll();
 
-		FlxG.sound.volume = FlxG.save.data.volume;
-		FlxG.sound.muted = FlxG.save.data.mute;
+		if(FlxG.save.data.volume != null)
+			FlxG.sound.volume = FlxG.save.data.volume;
+		if (FlxG.save.data.mute != null)
+			FlxG.sound.muted = FlxG.save.data.mute;
 	}
 
 	public static function loadControls():Void

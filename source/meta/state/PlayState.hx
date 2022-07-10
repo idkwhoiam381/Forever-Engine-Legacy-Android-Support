@@ -336,6 +336,10 @@ class PlayState extends MusicBeatState
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD);
 
+		#if android
+		addAndroidControls();
+		#end
+
 		//
 		keysArray = [
 			copyKey(Init.gameControls.get('LEFT')[0]),
@@ -385,7 +389,7 @@ class PlayState extends MusicBeatState
 		// Uncomment the code below to apply the effect
 
 		/*
-			var shader:GraphicsShader = new GraphicsShader("", File.getContent("./assets/shaders/vhs.frag"));
+			var shader:GraphicsShader = new GraphicsShader("", File.getContent(SUtil.getPath() + "assets/shaders/vhs.frag"));
 			FlxG.camera.setFilters([new ShaderFilter(shader)]);
 		 */
 	}
@@ -530,11 +534,19 @@ class PlayState extends MusicBeatState
 		if (dialogueBox != null && dialogueBox.alive)
 		{
 			// wheee the shift closes the dialogue
-			if (FlxG.keys.justPressed.SHIFT)
+			if (FlxG.keys.justPressed.SHIFT #if android || FlxG.android.justReleased.BACK #end)
 				dialogueBox.closeDialog();
 
+			var pressedEnter:Bool = controls.ACCEPT;
+
+			#if android
+			for (touch in FlxG.touches.list)
+				if (touch.justPressed)
+					pressedEnter = true;
+			#end
+
 			// the change I made was just so that it would only take accept inputs
-			if (controls.ACCEPT && dialogueBox.textStarted)
+			if (pressedEnter && dialogueBox.textStarted)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				dialogueBox.curPage += 1;
@@ -549,10 +561,8 @@ class PlayState extends MusicBeatState
 		if (!inCutscene)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
-			{
+			if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 				pauseGame();
-			}
 
 			// make sure you're not cheating lol
 			if (!isStoryMode)
@@ -1645,6 +1655,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		#if android
+		androidControls.visible = false;
+		#end
 		canPause = false;
 		songMusic.volume = 0;
 		vocals.volume = 0;
@@ -1823,7 +1836,7 @@ class PlayState extends MusicBeatState
 
 	function callTextbox()
 	{
-		var dialogPath = Paths.json(SONG.song.toLowerCase() + '/dialogue');
+		var dialogPath = SUtil.getPath() + Paths.json(SONG.song.toLowerCase() + '/dialogue');
 		if (sys.FileSystem.exists(dialogPath))
 		{
 			startedCountdown = false;
@@ -1864,6 +1877,11 @@ class PlayState extends MusicBeatState
 	private function startCountdown():Void
 	{
 		inCutscene = false;
+
+		#if android
+		androidControls.visible = true;
+		#end
+
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
 

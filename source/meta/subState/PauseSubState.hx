@@ -28,19 +28,12 @@ class PauseSubState extends MusicBeatSubState
 	public function new(x:Float, y:Float)
 	{
 		super();
-		#if debug
-		// trace('pause call');
-		#end
 
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
 		FlxG.sound.list.add(pauseMusic);
-
-		#if debug
-		// trace('pause background');
-		#end
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0;
@@ -53,10 +46,6 @@ class PauseSubState extends MusicBeatSubState
 		levelInfo.setFormat(Paths.font("vcr.ttf"), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
-
-		#if debug
-		// trace('pause info');
-		#end
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
 		levelDifficulty.text += CoolUtil.difficultyFromNumber(PlayState.storyDifficulty);
@@ -96,34 +85,19 @@ class PauseSubState extends MusicBeatSubState
 			grpMenuShit.add(songText);
 		}
 
-		#if debug
-		// trace('change selection');
-		#end
-
 		changeSelection();
-
-		#if debug
-		// trace('cameras');
-		#end
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
-		#if debug
-		// trace('cameras done');
+		#if android
+		addVirtualPad(UP_DOWN, A);
+		addPadCamera();
 		#end
 	}
 
 	override function update(elapsed:Float)
 	{
-		#if debug
-		// trace('call event');
-		#end
-
 		super.update(elapsed);
-
-		#if debug
-		// trace('updated event');
-		#end
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -159,16 +133,6 @@ class PauseSubState extends MusicBeatSubState
 			}
 		}
 
-		if (FlxG.keys.justPressed.J)
-		{
-			// for reference later!
-			// PlayerSettings.player1.controls.replaceBinding(Control.LEFT, Keys, FlxKey.J, null);
-		}
-
-		#if debug
-		// trace('music volume increased');
-		#end
-
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 	}
@@ -191,10 +155,6 @@ class PauseSubState extends MusicBeatSubState
 
 		var bullShit:Int = 0;
 
-		#if debug
-		// trace('mid selection');
-		#end
-
 		for (item in grpMenuShit.members)
 		{
 			item.targetY = bullShit - curSelected;
@@ -209,10 +169,5 @@ class PauseSubState extends MusicBeatSubState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
-
-		#if debug
-		// trace('finished selection');
-		#end
-		//
 	}
 }
