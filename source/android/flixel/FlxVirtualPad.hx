@@ -187,7 +187,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 	 * @param   Callback   The callback for the button.
 	 * @return  The button
 	 */
-	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?Color:Int, ?OnClick:Void->Void):FlxButton
+	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
 	{
 		var button:FlxButton = new FlxButton(X, Y);
 		button.frames = FlxTileFrames.fromFrame(FlxAtlasFrames.fromSparrow('assets/android/virtualpad.png', 'assets/android/virtualpad.xml').getByName(Graphic), FlxPoint.get(Width, Height));
@@ -195,18 +195,11 @@ class FlxVirtualPad extends FlxSpriteGroup
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
+		button.color = Color;
 		button.alpha = 0.6;
-
-		if (Color != null)
-			button.color = Color;
-
 		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
-
-		if (OnClick != null)
-			button.onDown.callback = OnClick;
-
 		return button;
 	}
 }
