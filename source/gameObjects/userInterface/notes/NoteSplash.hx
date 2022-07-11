@@ -11,6 +11,7 @@ class NoteSplash extends FNFSprite
 	public function new(noteData:Int)
 	{
 		super(x, y);
+		alpha = 0.00001;
 	}
 
 	override function update(elapsed:Float)
