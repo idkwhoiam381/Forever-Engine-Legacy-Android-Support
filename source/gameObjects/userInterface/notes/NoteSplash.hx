@@ -11,8 +11,6 @@ class NoteSplash extends FNFSprite
 	public function new(noteData:Int)
 	{
 		super(x, y);
-		visible = false;
-		alpha = 0.6;
 	}
 
 	override function update(elapsed:Float)
@@ -20,12 +18,9 @@ class NoteSplash extends FNFSprite
 		super.update(elapsed);
 
 		// kill the note splash if it's done
-		if (animation.finished)
-		{
-			// set the splash to invisible
-			if (alpha != 0.00001)
-				alpha = 0.00001;
-		}
+		if(animation.curAnim != null)
+			if(animation.curAnim.finished)
+				kill();
 		//
 	}
 
@@ -33,7 +28,7 @@ class NoteSplash extends FNFSprite
 	{
 		// make sure the animation is visible
 		if (!Init.trueSettings.get('Disable Note Splashes'))
-			visible = true;
+			alpha = 0.6;
 
 		super.playAnim(AnimName, Force, Reversed, Frame);
 	}
