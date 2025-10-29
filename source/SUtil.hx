@@ -1,9 +1,9 @@
 package;
 
 #if android
+import android.os.Build.VERSION.SDK_INT;
 import android.Permissions;
 import android.PermissionsList;
-import android.os.Build.VERSION;
 import android.os.Environment;
 #end
 import flash.system.System;
