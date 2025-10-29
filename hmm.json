@@ -1,0 +1,73 @@
+{
+  "dependencies": [
+    {
+      "name": "hxcpp",
+      "type": "haxelib",
+      "version": "4.2.1"
+    },
+    {
+      "name": "lime",
+      "type": "haxelib",
+      "version": "7.9.0"
+    },
+    {
+      "name": "openfl",
+      "type": "haxelib",
+      "version": "9.1.0"
+    },
+    {
+      "name": "flixel",
+      "type": "haxelib",
+      "version": "4.11.0"
+    },
+    {
+      "name": "flixel-addons",
+      "type": "haxelib",
+      "version": "2.11.0"
+    },
+    {
+      "name": "flixel-tools",
+      "type": "haxelib",
+      "version": "1.5.1"
+    },
+    {
+      "name": "flixel-ui",
+      "type": "haxelib",
+      "version": "2.4.0"
+    },
+    {
+      "name": "hscript",
+      "type": "haxelib"
+    },
+    {
+      "name": "hxCodec",
+      "type": "git",
+      "ref": "main",
+      "url": "https://github.com/SPLCoding/hxCodec-but-it-works-xd.git"
+    },
+    {
+      "name": "discord_rpc",
+      "type": "git",
+      "ref": "master",
+      "url": "https://github.com/Aidan63/linc_discord-rpc"
+    },
+    {
+      "name": "polymod",
+      "type": "git",
+      "ref": "master",
+      "url": "https://github.com/larsiusprime/polymod"
+    },
+    {
+      "name": "extension-androidtools",
+      "type": "git",
+      "ref": "main",
+      "url": "https://github.com/MaysLastPlays-Stuff/extension-androidtools-old"
+    },
+    {
+      "name": "linc_luajit",
+      "type": "git",
+      "ref": "master",
+      "url": "https://github.com/Daninnocent/linc_luajit"
+    }
+  ]
+}
